@@ -1,0 +1,15 @@
+<form class="col-3">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input [(ngModel)]="userModel.name" type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input [(ngModel)]="userModel.email" type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone:</label>
+    <input [(ngModel)]="userModel.phone" type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)='getUser()'>Send</button>
+</form>
