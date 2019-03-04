@@ -84,7 +84,7 @@ app.delete('/recipes/:name', function (req, res) {
             throw error;
         else
             res.json({
-                status: 'ok'
+                status: 'The recipe delited!'
             })
     });
 })

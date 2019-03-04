@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,17 @@ export class RecipeService {
 
   get(): Observable<object> {
 
-    return this.httpClient.get('http://localhost:8888/recipes');
+    return this.httpClient.get(environment.serverUrl + 'recipes');
   };
 
   delite(name): Observable<object> {
 
-    return this.httpClient.delete('http://localhost:8888/recipes/' + name);
+    return this.httpClient.delete(environment.serverUrl + 'recipes/' + name);
   }
 
   addRecipe(recipe): Observable<object> {
 
-    return this.httpClient.post<object>('http://localhost:8888/recipes', recipe);
+    return this.httpClient.post<object>(environment.serverUrl + 'recipes', recipe);
   }
 
 }

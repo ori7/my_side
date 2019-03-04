@@ -25,6 +25,8 @@ export class ListRecipeComponent implements OnInit {
 
   deleteRecipe(name) {
     this.recipeService.delite(name).subscribe(res => {
+      //  TODO:
+      alert(res[status]);
       console.log(res);
     });
     const index = this.recipes.findIndex(x => x.name === name);
