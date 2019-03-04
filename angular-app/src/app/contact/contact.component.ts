@@ -21,7 +21,8 @@ export class ContactComponent implements OnInit {
 
     this.contactService.sendToServer(this.userModel).subscribe(successRes => {
       alert('saved');
-    }, errorRes => {console.log(errorRes);
+    }, errorRes => {
+      console.log(errorRes);
       alert('failed');
     });
 

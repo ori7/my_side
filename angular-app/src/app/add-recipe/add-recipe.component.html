@@ -1,0 +1,11 @@
+<form class="col-3">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input [(ngModel)]="recipe.name" type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+  </div>
+  <div class="form-group">
+    <label for="email">Instruction:</label>
+    <input [(ngModel)]="recipe.instruction" type="text" class="form-control" id="instruction" placeholder="Enter instruction" name="instruction">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)='addRecipe()'>Send</button>
+</form>

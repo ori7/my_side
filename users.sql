@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2019 at 09:16 PM
+-- Generation Time: Mar 04, 2019 at 08:56 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -40,54 +40,35 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `name`, `email`, `phone`) VALUES
-(1, 'dsf', 'sdf', 'sdf'),
-(2, 'dsf', 'sdf', 'sdf'),
-(3, 'dsfds', 'sdfsdf', 'sdfsdf'),
-(4, 'dsfds', 'sdfsdf', 'sdfsdf'),
-(5, 'sda', 'safd', 'asd'),
-(6, 'sda', 'safd', 'asd'),
-(7, 's', 'asc', 'undefined'),
-(8, 's', 'asc', 'sdf'),
-(9, 'ssad', 'ascsdf', 'sdfsdf'),
-(10, 'opipoi', 'iop', 'yrteyre'),
-(11, 'dgdff', 'dfgfg', 'yrteyrfdgdfge'),
-(12, 's', 'asc', 'undefined'),
-(13, 's', 'asc', 'sdf'),
-(14, 'dgdff', 'dfgfg', 'yrteyrfdgdfge'),
-(15, 'ssad', 'ascsdf', 'sdfsdf'),
-(16, 'opipoi', 'iop', 'yrteyre'),
-(17, 's', 'dfs', 'dgfdg'),
-(18, 's', 'dfs', 'dgfdg'),
-(19, 's', 'dfs', 'dgfdg'),
-(20, 's', 'dfs', 'dgfdg'),
-(21, 'dsfsdf', 'dfssdfsdf', 'dgfdgsdfdfssdf'),
-(22, 'dsfsdf', 'dfssdfsdf', 'dgfdgsdfdfssdf'),
-(23, 'gfgfdg', 'ghfhghfg', 'ghfghfghfgh'),
-(24, 'gfgfdg', 'ghfhghfg', 'ghfghfghfgh'),
-(25, 'sadff', 'dfsdfgsdf', 'sdf'),
-(26, 'sadff', 'dfsdfgsdf', 'sdf'),
-(27, 'dfgfdgdfgdfgfg', 'fdg', 'sdf'),
-(28, 'dfgfgfg', 'fdgfsdfsd', 'sdfdfs'),
-(29, 'uyiuyiu', 'uiyiu', 'iyui'),
-(30, 'sadff', 'dfsdfgsdf', 'sdf'),
-(31, 'dfs', 'dsf', 'sdffgsdfg'),
-(32, 'sadff', 'dfsdfgsdf', 'sdf'),
-(33, 'dfgfdgdfgdfgfg', 'fdg', 'sdf'),
-(34, 'dfgfgfg', 'fdgfsdfsd', 'sdfdfs'),
-(35, 'uyiuyiu', 'uiyiu', 'iyui'),
-(36, 'dfs', 'dsf', 'sdffgsdfg'),
-(37, 'sdfsdf', 'dfstfdfg', 'dfgdg'),
-(38, 'sdfsdf', 'dfstfdfg', 'dfgdg'),
-(39, 'sdfsdf', 'dfstfdfg', 'dfgdg'),
-(40, 'dfg', 'dfs', 'd'),
-(41, 'f', 'f', 'f'),
-(42, 'f', 'f', 'f'),
-(43, 'f', 'f', 'f'),
-(44, 'f', 'f', 'f'),
-(45, 'sxc', 'zxc', 'zxc'),
-(46, 'sdf', 'sdfdfssdfsdfsdf', 'dsd'),
-(47, 'sdf', 'sdfdfssdfsdfsdf', 'dsd'),
-(48, 'df', 'erwwee', 'erwwerrw');
+(57, 'sdfdf', 'sddfsdff', 'sdfds'),
+(58, 'sdfd', 'undefined', 'undefined'),
+(59, 'sdfdf', 'undefined', 'undefined'),
+(60, 'df', 'undefined', 'undefined'),
+(61, 'segd', 'undefined', 'undefined'),
+(62, 'df', 'undefined', 'undefined'),
+(63, 'dfdfgdfg', 'undefined', 'undefined'),
+(64, 'sfdf', 'undefined', 'undefined'),
+(65, 'rdtg', 'undefined', 'undefined');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipe`
+--
+
+CREATE TABLE `recipe` (
+  `id` int(11) NOT NULL,
+  `name` varchar(20) COLLATE utf8_bin NOT NULL,
+  `instructions` varchar(250) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `recipe`
+--
+
+INSERT INTO `recipe` (`id`, `name`, `instructions`) VALUES
+(1, 'bread', 'Knead flour and water.\r\nPut in the oven.'),
+(2, 'omelet', 'Break an egg.\r\nPut in the pan.');
 
 --
 -- Indexes for dumped tables
@@ -100,6 +81,12 @@ ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `recipe`
+--
+ALTER TABLE `recipe`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -107,7 +94,13 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+
+--
+-- AUTO_INCREMENT for table `recipe`
+--
+ALTER TABLE `recipe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
