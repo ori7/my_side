@@ -10,24 +10,21 @@ import { UserModel } from '../models/user.model';
 export class ContactComponent implements OnInit {
   userModel: UserModel;
 
-  constructor(private contactService: ContactService) { 
+  constructor(private contactService: ContactService) {
     this.userModel = <UserModel>{};
   }
 
   ngOnInit() {
   }
 
-  getUser(){
+  getUser() {
 
     this.contactService.sendToServer(this.userModel).subscribe(successRes => {
-      // saved!
-      debugger;
       alert('saved');
-    },errorRes => {
-      debugger;
+    }, errorRes => {console.log(errorRes);
       alert('failed');
     });
-    
+
   }
 
 }
