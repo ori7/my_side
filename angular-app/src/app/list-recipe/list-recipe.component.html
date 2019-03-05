@@ -1,6 +1,6 @@
 <div class="row">
   <div class='m-3' *ngFor= 'let r of recipes'>
-    <app-recipe-item [recipe] = 'r' (deliteRecipe)="deleteRecipe($event)"></app-recipe-item>
+    <app-recipe-item [recipe] = 'r' (deliteRecipe)="deleteRecipe($event)" (updateRecipe)="updateRecipe($event)"></app-recipe-item>
   </div>
 </div>
 <div>

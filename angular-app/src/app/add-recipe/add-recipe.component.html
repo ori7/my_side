@@ -4,8 +4,8 @@
     <input [(ngModel)]="recipe.name" type="text" class="form-control" id="name" placeholder="Enter name" name="name">
   </div>
   <div class="form-group">
-    <label for="email">Instruction:</label>
-    <input [(ngModel)]="recipe.instruction" type="text" class="form-control" id="instruction" placeholder="Enter instruction" name="instruction">
+    <label for="instructions">Instructions:</label>
+    <textarea [(ngModel)]="recipe.instructions" type="text" class="form-control" id="instructions" placeholder="Enter instructions" name="instructions"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary" (click)='addRecipe()'>Send</button>
+  <button type="submit" class="btn btn-primary" (click)='addRecipe()'>Add recipe</button>
 </form>

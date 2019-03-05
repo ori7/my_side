@@ -15,14 +15,19 @@ export class RecipeService {
     return this.httpClient.get(environment.serverUrl + 'recipes');
   };
 
+  update(recipe): Observable<object> {
+    
+    return this.httpClient.put(environment.serverUrl + 'recipes/' + recipe.name, {instructions: recipe.instructions});
+  };
+
   delite(name): Observable<object> {
 
     return this.httpClient.delete(environment.serverUrl + 'recipes/' + name);
-  }
+  };
 
   addRecipe(recipe): Observable<object> {
 
     return this.httpClient.post<object>(environment.serverUrl + 'recipes', recipe);
-  }
+  };
 
-}
+};

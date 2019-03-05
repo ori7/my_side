@@ -12,6 +12,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { ListRecipeComponent } from './list-recipe/list-recipe.component';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
+import { UpdateFormComponent } from './update-form/update-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RecipeItemComponent } from './recipe-item/recipe-item.component';
     ContactComponent,
     AddRecipeComponent,
     ListRecipeComponent,
-    RecipeItemComponent
+    RecipeItemComponent,
+    UpdateFormComponent
   ],
   imports: [
     BrowserModule,

@@ -75,6 +75,17 @@ app.post('/recipes', function (req, res) {
     });
 });
 
+app.put('/recipes/:name', function (req, res) {
+    const query = 'UPDATE `recipe` SET `instructions`="' + req.body.instructions + '" WHERE `name`="' + req.params.name + '"';
+    connection(query, function (error, results) {
+        if (error) {
+            throw error;
+        }
+        res.json({
+            status: 'The recipe updated successfully!'
+        })
+    });
+});
 
 app.delete('/recipes/:name', function (req, res) {
     const query = 'DELETE FROM `recipe` WHERE `name` ="' + req.params.name + '"';

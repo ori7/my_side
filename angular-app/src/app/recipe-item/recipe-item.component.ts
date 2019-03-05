@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-item',
@@ -8,14 +9,20 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class RecipeItemComponent implements OnInit {
 
   @Input() recipe;
-  @Output() deliteRecipe: EventEmitter<string> = new  EventEmitter<string>();
+  @Output() deliteRecipe: EventEmitter<string> = new EventEmitter<string>();
+  @Output() updateRecipe: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  delite(){
+  update(recipe) {console.log(name);
+    this.router.navigate(['updateRecipe',recipe.name, {instructions: recipe.instructions} ]);
+    //this.updateRecipe.emit(this.recipe.name);
+  }
+
+  delite() {
     this.deliteRecipe.emit(this.recipe.name);
   }
 

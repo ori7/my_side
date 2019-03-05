@@ -21,14 +21,14 @@ export class ListRecipeComponent implements OnInit {
     }, errorRes => {
       alert('failed');
     });;
-  }
+  };
 
-  deleteRecipe(name) {
+  deleteRecipe(name:string) {
     this.recipeService.delite(name).subscribe(res => {
       alert(res["status"]);
     });
     const index = this.recipes.findIndex(x => x.name === name);
     this.recipes.splice(index, 1);
-  }
+  };
 
 }
