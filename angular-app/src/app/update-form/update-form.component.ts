@@ -19,6 +19,7 @@ export class UpdateFormComponent implements OnInit {
   ngOnInit() {
 
     this.activatedRoute.params.subscribe(p =>{
+      this.recipe.id = p["id"];
       this.recipe.name = p["name"];
       this.recipe.instructions = p["instructions"];
     })

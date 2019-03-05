@@ -24,22 +24,11 @@ app.post('/contact', function (req, res) {
                 }
                 res.json({
                     status: 'The user entered successfully!'
-                })
+                });
             });
-
-        }
-    })
-});
-
-function writeToFile(user, callback) {
-    const line = 'Name: ' + user.name + ', Email: ' + user.email + ', Phone: ' + user.phone + '.';
-    fs.appendFile("usersList.txt", line + "\n", function (err) {
-        if (err) {
-            callback(err);
-        }
-        callback(null, 'written');
+        };
     });
-};
+});
 
 function connection(query, callback) {
     var connection = mysql.createConnection({
@@ -53,8 +42,18 @@ function connection(query, callback) {
     connection.end();
 };
 
+function writeToFile(user, callback) {
+    const line = 'Name: ' + user.name + ', Email: ' + user.email + ', Phone: ' + user.phone + '.';
+    fs.appendFile("usersList.txt", line + "\n", function (err) {
+        if (err) {
+            callback(err);
+        };
+        callback(null, 'written');
+    });
+};
+
 app.get('/recipes', function (req, res) {
-    const query = 'SELECT `name`, `instructions` FROM `recipe`';
+    const query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
     connection(query, function (error, results) {
         if (error)
             throw error;
@@ -64,40 +63,40 @@ app.get('/recipes', function (req, res) {
 });
 
 app.post('/recipes', function (req, res) {
-    const query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + req.body.name + '","' + req.body.instruction + '")'; console.log(query);
+    const query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + req.body.name + '","' + req.body.instructions + '")';
     connection(query, function (error, results) {
         if (error) {
             throw error;
         }
         res.json({
             status: 'The recipe aded successfully!'
-        })
+        });
     });
 });
 
-app.put('/recipes/:name', function (req, res) {
-    const query = 'UPDATE `recipe` SET `instructions`="' + req.body.instructions + '" WHERE `name`="' + req.params.name + '"';
+app.put('/recipes/:id', function (req, res) {
+    const query = 'UPDATE `recipe` SET `instructions`="' + req.body.instructions + '", `name`="' + req.body.name + '" WHERE `id`="' + req.params.id + '"';
     connection(query, function (error, results) {
         if (error) {
             throw error;
         }
         res.json({
             status: 'The recipe updated successfully!'
-        })
+        });
     });
 });
 
-app.delete('/recipes/:name', function (req, res) {
-    const query = 'DELETE FROM `recipe` WHERE `name` ="' + req.params.name + '"';
+app.delete('/recipes/:id', function (req, res) {
+    const query = 'DELETE FROM `recipe` WHERE `id` ="' + req.params.id + '"';
     connection(query, function (error, results) {
-        if (error)
+        if (error) {
             throw error;
-        else
-            res.json({
-                status: 'The recipe delited!'
-            })
+        }
+        res.json({
+            status: 'The recipe delited!'
+        });
     });
-})
+});
 
 app.listen(PORT, function () {
     console.log('server started at port ' + PORT)

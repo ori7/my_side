@@ -23,11 +23,11 @@ export class ListRecipeComponent implements OnInit {
     });;
   };
 
-  deleteRecipe(name:string) {
-    this.recipeService.delite(name).subscribe(res => {
+  deleteRecipe(id:number) {
+    this.recipeService.delite(id).subscribe(res => {
       alert(res["status"]);
     });
-    const index = this.recipes.findIndex(x => x.name === name);
+    const index = this.recipes.findIndex(x => x.id === id);
     this.recipes.splice(index, 1);
   };
 

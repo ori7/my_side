@@ -17,12 +17,12 @@ export class RecipeService {
 
   update(recipe): Observable<object> {
     
-    return this.httpClient.put(environment.serverUrl + 'recipes/' + recipe.name, {instructions: recipe.instructions});
+    return this.httpClient.put(environment.serverUrl + 'recipes/' + recipe.id, {instructions: recipe.instructions, name: recipe.name});
   };
 
-  delite(name): Observable<object> {
+  delite(id): Observable<object> {
 
-    return this.httpClient.delete(environment.serverUrl + 'recipes/' + name);
+    return this.httpClient.delete(environment.serverUrl + 'recipes/' + id);
   };
 
   addRecipe(recipe): Observable<object> {

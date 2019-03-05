@@ -9,21 +9,19 @@ import { Router } from '@angular/router';
 export class RecipeItemComponent implements OnInit {
 
   @Input() recipe;
-  @Output() deliteRecipe: EventEmitter<string> = new EventEmitter<string>();
-  @Output() updateRecipe: EventEmitter<string> = new EventEmitter<string>();
+  @Output() deliteRecipe: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  update(recipe) {console.log(name);
-    this.router.navigate(['updateRecipe',recipe.name, {instructions: recipe.instructions} ]);
-    //this.updateRecipe.emit(this.recipe.name);
+  update(recipe) {
+    this.router.navigate(['updateRecipe',recipe.id, { id: recipe.id, instructions: recipe.instructions, name: recipe.name } ]);
   }
 
   delite() {
-    this.deliteRecipe.emit(this.recipe.name);
+    this.deliteRecipe.emit(this.recipe.id);
   }
 
 }
