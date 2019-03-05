@@ -23,7 +23,7 @@ app.post('/contact', function (req, res) {
                     res.status(500).send();
                 }
                 res.json({
-                    status: 'ok'
+                    status: 'The user entered successfully!'
                 })
             });
 
@@ -63,15 +63,14 @@ app.get('/recipes', function (req, res) {
     });
 });
 
-app.post('/recipes', function (req, res) {console.log(req.body);
-    console.log('in');
+app.post('/recipes', function (req, res) {
     const query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + req.body.name + '","' + req.body.instruction + '")'; console.log(query);
     connection(query, function (error, results) {
         if (error) {
             throw error;
         }
         res.json({
-            status: 'ok'
+            status: 'The recipe aded successfully!'
         })
     });
 });

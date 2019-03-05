@@ -19,7 +19,7 @@ export class AddRecipeComponent implements OnInit {
 
   addRecipe(){
     this.recipeService.addRecipe(this.recipe).subscribe(successRes => {
-      alert('saved');
+      alert(successRes["status"]);
     }, errorRes => {
       console.log(errorRes);
       alert('failed');

@@ -20,7 +20,7 @@ export class ContactComponent implements OnInit {
   getUser() {
 
     this.contactService.sendToServer(this.userModel).subscribe(successRes => {
-      alert('saved');
+      alert(successRes["status"]);
     }, errorRes => {
       console.log(errorRes);
       alert('failed');
