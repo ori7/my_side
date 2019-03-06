@@ -1,7 +1,10 @@
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title"> {{ recipe.name }} </h5>
-    <p class="card-text"> Instructions: {{ recipe.instructions }} </p>
+    <p class="card-text">
+      <span class="font-weight-bold"> Instructions: </span>
+      {{ recipe.instructions }}
+    </p>
     <div class="row">
       <button type="button" class="btn btn-danger offset-1" (click)='update(recipe)'>Update</button>
       <button type="button" class="btn btn-danger offset-1" (click)='delite()'>Delite</button>
