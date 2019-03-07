@@ -1,5 +1,5 @@
 export interface RecipeModel {
     id: number,
     name: string,
-    instructions: string
+    instructions: string | string[]
 }

@@ -1,4 +1,4 @@
-<form class="col-4">
+<form class="col-4" #addForm="ngForm">
   <h3>Add recipe:</h3>
   <div class="form-group">
     <label for="name">Name:</label>
@@ -8,5 +8,5 @@
     <label for="instructions">Instructions:</label>
     <textarea [(ngModel)]="recipe.instructions" type="text" rows="4" class="form-control" id="instructions" placeholder="Enter instructions" name="instructions" required></textarea>
   </div>
-  <button type="submit" class="btn btn-primary" (click)='addRecipe()'>Add recipe</button>
+  <button [disabled]="addForm.form.invalid" type="submit" class="btn btn-primary" (click)='addRecipe(addForm)'>Add recipe</button>
 </form>

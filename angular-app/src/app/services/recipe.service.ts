@@ -1,23 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+import { RecipeModel } from '../models/recipe.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
 
-  constructor(private httpClient: HttpClient) { }
+  private data: BehaviorSubject<RecipeModel[]>;
 
-  get(): Observable<object> {
+  constructor(private httpClient: HttpClient) {
+    this.data = new BehaviorSubject<RecipeModel[]>([]);
+  }
 
-    return this.httpClient.get(environment.serverUrl + 'recipes');
+  get(): Observable<object[]> {
+    this.getData();
+    setInterval(() => {
+      this.getData();
+    }, 2 * 1000)
+    return this.data;
   };
 
   update(recipe): Observable<object> {
-    
-    return this.httpClient.put(environment.serverUrl + 'recipes/' + recipe.id, {instructions: recipe.instructions, name: recipe.name});
+
+    return this.httpClient.put(environment.serverUrl + 'recipes/' + recipe.id, recipe);
   };
 
   delite(id): Observable<object> {
@@ -29,5 +38,18 @@ export class RecipeService {
 
     return this.httpClient.post<object>(environment.serverUrl + 'recipes', recipe);
   };
+
+  getData() {
+    const sub = this.httpClient.get<RecipeModel[]>(environment.serverUrl + 'recipes').pipe(map(res => {
+      res.forEach(r => {
+        r.instructions = String(r.instructions).split("\n")
+        return r;
+      })
+      return res;
+    })).subscribe(res => {
+      this.data.next(res);
+      sub.unsubscribe();
+    });
+  }
 
 };

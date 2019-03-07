@@ -15,9 +15,8 @@ export class ListRecipeComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.recipeService.get().subscribe(successRes => {
-      this.recipes = successRes;
+      this.recipes = successRes;   console.log(successRes);
     }, errorRes => {
       alert('failed');
     });;

@@ -25,7 +25,7 @@ export class UpdateFormComponent implements OnInit {
     })
   }
 
-  updateRecipe(){
+  updateRecipe(updateForm){console.log(updateForm);
     
     this.recipeService.update(this.recipe).subscribe(res => {
       alert(res["status"]);

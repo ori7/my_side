@@ -14,7 +14,9 @@ export class RecipeItemComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+
   }
+  
 
   update(recipe) {
     this.router.navigate(['updateRecipe',recipe.id, { id: recipe.id, instructions: recipe.instructions, name: recipe.name } ]);
