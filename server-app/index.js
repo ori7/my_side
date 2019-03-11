@@ -10,6 +10,30 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+io.on('connection', function (socket) {
+    
+    console.log('a user connected');
+
+    socket.on('message', function (msg) {
+        console.log('message: ' + msg);
+        sqlOperation.getReceipes(function(err, res) {
+            if (err) {
+                throw error;
+            }
+            else {
+                socket.emit('message', res); 
+            }
+        })
+    });
+
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
+    });
+});
+
 app.post('/contact', function (req, res) {
 
     const query = 'INSERT INTO `contact`(`name`, `email`, `phone`) VALUES("' + req.body.name + '","' + req.body.email + '","' + req.body.phone + '")';
@@ -53,14 +77,27 @@ function writeToFile(user, callback) {
 };
 
 app.get('/recipes', function (req, res) {
-    const query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
-    connection(query, function (error, results) {
-        if (error)
+    sqlOperation.getReceipes(function(error, result) {
+        if (error) {
             throw error;
-        else
-            res.send(results);
-    });
+        }
+        else {
+            res.send(result);
+        }
+    })
 });
+
+const sqlOperation = {
+    getReceipes: function(callback) {
+        const query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
+        connection(query, function (error, results) {
+            if (error)
+                callback(error);
+            else
+                callback(null, results);
+        });
+    }
+}
 
 app.post('/recipes', function (req, res) {
     const query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + req.body.name + '","' + req.body.instructions + '")';
@@ -98,6 +135,6 @@ app.delete('/recipes/:id', function (req, res) {
     });
 });
 
-app.listen(PORT, function () {
+http.listen(PORT, function () {
     console.log('server started at port ' + PORT)
 });

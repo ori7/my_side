@@ -14,6 +14,9 @@
  * Learn more in https://angular.io/guide/browser-support
  */
 
+ /* global scope */
+ (window as any).global = window
+
 /***************************************************************************************************
  * BROWSER POLYFILLS
  */

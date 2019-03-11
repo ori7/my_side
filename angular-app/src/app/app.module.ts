@@ -14,6 +14,9 @@ import { ListRecipeComponent } from './list-recipe/list-recipe.component';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { UpdateFormComponent } from './update-form/update-form.component';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:8888', options: {} };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +33,8 @@ import { UpdateFormComponent } from './update-form/update-form.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]
