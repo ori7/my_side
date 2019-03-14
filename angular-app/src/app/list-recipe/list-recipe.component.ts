@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
+import { RecipeSocketService } from '../services/recipe-socket.service';
+import { environment } from 'src/environments/environment';
+import { RecipeModel } from '../models/recipe.model';
 
 @Component({
   selector: 'app-list-recipe',
@@ -8,23 +11,37 @@ import { RecipeService } from '../services/recipe.service';
 })
 export class ListRecipeComponent implements OnInit {
 
-  recipes;
+  recipes:RecipeModel[];
+  service;
 
-  constructor(private recipeService: RecipeService) { 
+  constructor(private recipeService: RecipeService,
+    private recipeSocketService: RecipeSocketService) {
 
   }
 
   ngOnInit() {
-    this.recipeService.get().subscribe(successRes => {
-      this.recipes = successRes;   
+
+    switch (environment.service) {
+      case 'httpServer':
+        this.service = this.recipeService;
+        break;
+      case 'socket':
+        this.service = this.recipeSocketService;
+        break;
+      default:
+        this.service = this.recipeService;
+    }
+
+    this.service.get().subscribe(successRes => {
+      this.recipes = successRes;
       console.log(successRes);
     }, errorRes => {
       alert('failed');
-    });;
+    });
   };
 
-  deleteRecipe(id:number) {
-    this.recipeService.delite(id).subscribe(res => {
+  deleteRecipe(id: number) {
+    this.service.delite(id).subscribe(res => {
       alert(res["status"]);
     });
     const index = this.recipes.findIndex(x => x.id === id);

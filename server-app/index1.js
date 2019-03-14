@@ -10,74 +10,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-
-io.on('connection', function (socket) {
-    console.log('a user connected');
-/*
-    socket.emit('message', msg => {
-        console.log('message e: ' + msg);
-        var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
-        connection(query, function (error, results) {
-            if (error) {
-                throw error;
-            }
-            else {
-                socket.emit('message', results);
-            }
-        });
-    });
-    */
-
-    socket.on('message', msg => {
-        console.log('message e: ' + msg);
-        var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
-        connection(query, function (error, results) {
-            if (error) {
-                throw error;
-            }
-            else {
-                socket.emit('message', results);
-            }
-        });
-    });
-
-    socket.on('add', d => {
-        const query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + d.name + '","' + d.instructions + '")';
-        connection(query, function (error, results) {
-            if (error) {
-                throw error;
-            }
-            socket.emit('add');
-        });
-    })
-
-    socket.on('update', d => {
-        const query = 'UPDATE `recipe` SET `instructions`="' + d.instructions + '", `name`="' + d.name + '" WHERE `id`="' + d.id + '"';
-        connection(query, function (error, results) {
-            if (error) {
-                throw error;
-            }
-            socket.emit('update');
-        });
-    })
-
-    socket.on('delite', d => {
-        const query = 'DELETE FROM `recipe` WHERE `id` ="' + d.id + '"';
-        connection(query, function (error, results) {
-            if (error) {
-                throw error;
-            }
-            socket.emit('delite');
-        });
-    })
-
-    socket.on('disconnect', function () {
-        console.log('user disconnected');
-    });
-});
-
 app.post('/contact', function (req, res) {
 
     const query = 'INSERT INTO `contact`(`name`, `email`, `phone`) VALUES("' + req.body.name + '","' + req.body.email + '","' + req.body.phone + '")';
@@ -121,25 +53,17 @@ function writeToFile(user, callback) {
 };
 
 app.get('/recipes', function (req, res) {
-    sqlOperationRecipe('get', function (error, results) {
+    console.log('gg');
+    const query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
+    connection(query, function (error, results) {
         if (error) {
+            console.log('error');
             throw error;
         }
         else
             res.send(results);
     });
-});
-
-function sqlOperationRecipe(operation, callback) {
-    if (operation === 'get')
-        var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
-    connection(query, function (error, results) {
-        if (error)
-            callback(error);
-        else
-            callback(null, results);
-    });
-}
+})
 
 app.post('/recipes', function (req, res) {
     const query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + req.body.name + '","' + req.body.instructions + '")';
@@ -177,6 +101,6 @@ app.delete('/recipes/:id', function (req, res) {
     });
 });
 
-http.listen(PORT, function () {
+app.listen(PORT, function () {
     console.log('server started at port ' + PORT)
 });
