@@ -13,35 +13,21 @@ app.use(express.json());
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+function getR(callback) {
+    var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
+    connection(query, function (error, results) {
+        if (error) {
+            throw error;
+        }
+        else {
+            //console.log(results);
+            callback(null, results);
+        }
+    });
+}
+
 io.on('connection', function (socket) {
     console.log('a user connected');
-    /*
-        socket.emit('message', msg => {
-            console.log('message e: ' + msg);
-            var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
-            connection(query, function (error, results) {
-                if (error) {
-                    throw error;
-                }
-                else {
-                    socket.emit('message', results);
-                }
-            });
-        });
-        */
-
-    socket.on('message', msg => {
-        console.log('message e: ' + msg);
-        var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
-        connection(query, function (error, results) {
-            if (error) {
-                throw error;
-            }
-            else {
-                socket.emit('message', results);
-            }
-        });
-    });
 
     socket.on('add', d => {
         var query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + d.name + '","' + d.instructions + '")';
@@ -49,16 +35,11 @@ io.on('connection', function (socket) {
             if (error) {
                 throw error;
             }
-            //socket.emit('add');
-            var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
-            connection(query, function (error, results) {
+            getR(function (error, res) {
                 if (error) {
                     throw error;
                 }
-                else {
-                    console.log(results);
-                    socket.send(results);
-                }
+                socket.emit('message', res);
             });
         });
     })
@@ -69,7 +50,9 @@ io.on('connection', function (socket) {
             if (error) {
                 throw error;
             }
-            socket.emit('update');
+            const r = getR();
+            console.log(r);
+            socket.emit('message', r);
         });
     })
 
@@ -79,7 +62,9 @@ io.on('connection', function (socket) {
             if (error) {
                 throw error;
             }
-            socket.emit('delite');
+            const r = getR();
+            console.log(r);
+            socket.emit('message', r);
         });
     })
 
