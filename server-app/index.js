@@ -15,20 +15,20 @@ const io = require('socket.io')(http);
 
 io.on('connection', function (socket) {
     console.log('a user connected');
-/*
-    socket.emit('message', msg => {
-        console.log('message e: ' + msg);
-        var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
-        connection(query, function (error, results) {
-            if (error) {
-                throw error;
-            }
-            else {
-                socket.emit('message', results);
-            }
+    /*
+        socket.emit('message', msg => {
+            console.log('message e: ' + msg);
+            var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
+            connection(query, function (error, results) {
+                if (error) {
+                    throw error;
+                }
+                else {
+                    socket.emit('message', results);
+                }
+            });
         });
-    });
-    */
+        */
 
     socket.on('message', msg => {
         console.log('message e: ' + msg);
@@ -44,12 +44,22 @@ io.on('connection', function (socket) {
     });
 
     socket.on('add', d => {
-        const query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + d.name + '","' + d.instructions + '")';
+        var query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + d.name + '","' + d.instructions + '")';
         connection(query, function (error, results) {
             if (error) {
                 throw error;
             }
-            socket.emit('add');
+            //socket.emit('add');
+            var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
+            connection(query, function (error, results) {
+                if (error) {
+                    throw error;
+                }
+                else {
+                    console.log(results);
+                    socket.send(results);
+                }
+            });
         });
     })
 

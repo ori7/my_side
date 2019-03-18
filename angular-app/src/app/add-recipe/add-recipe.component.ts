@@ -33,11 +33,14 @@ export class AddRecipeComponent implements OnInit {
   }
 
   addRecipe() {
+
     this.service.addRecipe(this.recipe).subscribe(successRes => {
       if (successRes["status"])
         alert(successRes["status"]);
-      else
-        console.log(successRes.connected);
+      else {
+        console.log(successRes);
+      }
+      this.recipe.name = this.recipe.instructions = '';
     }, errorRes => {
       console.log(errorRes);
       alert('failed');

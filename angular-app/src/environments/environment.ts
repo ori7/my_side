@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   serverUrl: 'http://localhost:8888/',
-  service: 'socket'
+  service: 'socket' // 'httpServer'
 };
 
 /*

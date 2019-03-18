@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeModel } from '../models/recipe.model';
 import { RecipeService } from '../services/recipe.service';
 import { environment } from 'src/environments/environment';
@@ -17,7 +17,8 @@ export class UpdateFormComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
      private recipeService: RecipeService,
-     private recipeSocketService: RecipeSocketService) {
+     private recipeSocketService: RecipeSocketService,
+     private router: Router) {
     this.recipe = <RecipeModel>{};
    }
 
@@ -46,6 +47,7 @@ export class UpdateFormComponent implements OnInit {
     this.service.update(this.recipe).subscribe(res => {
       alert(res["status"]);
     });
+    this.router.navigate(['recipes']);
   }
 
 }
