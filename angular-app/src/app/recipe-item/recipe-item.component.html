@@ -3,8 +3,10 @@
     <h5 class="card-title"> {{ recipe.name }} </h5>
     <div class="card-text">
       <span class="font-weight-bold"> Instructions: </span>
-      <div *ngFor='let row of recipe.instructions'>
-        &nbsp;&nbsp; {{ row }}
+      <div class="offset-1">
+        <div *ngFor='let row of recipe.instructions'>
+          {{ row }}
+        </div>
       </div>
     </div>
     <br>

@@ -35,11 +35,7 @@ export class AddRecipeComponent implements OnInit {
   addRecipe() {
 
     this.service.addRecipe(this.recipe).subscribe(successRes => {
-      if (successRes["status"])
-        alert(successRes["status"]);
-      else {
-        console.log(successRes);
-      }
+      alert('The recipe updated successfully!');
       this.recipe.name = this.recipe.instructions = '';
     }, errorRes => {
       console.log(errorRes);

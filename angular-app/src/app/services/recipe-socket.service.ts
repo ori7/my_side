@@ -11,15 +11,17 @@ export class RecipeSocketService {
 
   constructor(private socket: Socket) { }
 
-  get(): Observable<RecipeModel[]> {console.log('pp');
+  get(): Observable<RecipeModel[]> {
 
-    var resultArray = this.socket.fromEvent("message").pipe(map((res: RecipeModel[]) => {
+    this.socket.emit("message");
+
+    var resultArray = this.socket.fromEvent("message").pipe(map((res: RecipeModel[]) => {console.log(res);
       res.forEach(r => {
         r.instructions = String(r.instructions).split("\n");
         return r;
       });
       return res;
-    }));console.log(resultArray); 
+    }));
     return resultArray;
   }
 

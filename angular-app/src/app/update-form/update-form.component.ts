@@ -45,7 +45,7 @@ export class UpdateFormComponent implements OnInit {
   updateRecipe(updateForm){console.log(updateForm);
     
     this.service.update(this.recipe).subscribe(res => {
-      alert(res["status"]);
+      alert('The recipe updated successfully!');
     });
     this.router.navigate(['recipes']);
   }

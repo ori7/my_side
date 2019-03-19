@@ -17,10 +17,9 @@ function getR(callback) {
     var query = 'SELECT `id`, `name`, `instructions` FROM `recipe`';
     connection(query, function (error, results) {
         if (error) {
-            throw error;
+            callback(error);
         }
         else {
-            //console.log(results);
             callback(null, results);
         }
     });
@@ -29,14 +28,23 @@ function getR(callback) {
 io.on('connection', function (socket) {
     console.log('a user connected');
 
+    socket.on('message', function () {
+        getR(function (err, res) {
+            if (err) {
+                throw error;
+            }
+            socket.emit('message', res);
+        });
+    });
+
     socket.on('add', d => {
         var query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + d.name + '","' + d.instructions + '")';
         connection(query, function (error, results) {
             if (error) {
                 throw error;
             }
-            getR(function (error, res) {
-                if (error) {
+            getR(function (err, res) {
+                if (err) {
                     throw error;
                 }
                 socket.emit('message', res);
@@ -50,21 +58,27 @@ io.on('connection', function (socket) {
             if (error) {
                 throw error;
             }
-            const r = getR();
-            console.log(r);
-            socket.emit('message', r);
+            getR(function (err, res) {
+                if (err) {
+                    throw error;
+                }
+                socket.emit('message', res);
+            });
         });
     })
 
     socket.on('delite', d => {
-        const query = 'DELETE FROM `recipe` WHERE `id` ="' + d.id + '"';
+        const query = 'DELETE FROM `recipe` WHERE `id` ="' + d + '"';
         connection(query, function (error, results) {
             if (error) {
                 throw error;
             }
-            const r = getR();
-            console.log(r);
-            socket.emit('message', r);
+            getR(function (err, res) {
+                if (err) {
+                    throw error;
+                }
+                socket.emit('message', res);
+            });
         });
     })
 
@@ -116,12 +130,11 @@ function writeToFile(user, callback) {
 };
 
 app.get('/recipes', function (req, res) {
-    sqlOperationRecipe('get', function (error, results) {
+    getR(function (error, results) {
         if (error) {
             throw error;
         }
-        else
-            res.send(results);
+        res.send(results);
     });
 });
 

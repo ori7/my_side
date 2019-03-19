@@ -11,7 +11,7 @@ import { RecipeModel } from '../models/recipe.model';
 })
 export class ListRecipeComponent implements OnInit {
 
-  recipes:RecipeModel[];
+  recipes: RecipeModel[];
   service;
 
   constructor(private recipeService: RecipeService,
@@ -34,7 +34,6 @@ export class ListRecipeComponent implements OnInit {
 
     this.service.get().subscribe(successRes => {
       this.recipes = successRes;
-      console.log(successRes);
     }, errorRes => {
       alert('failed');
     });
@@ -42,10 +41,12 @@ export class ListRecipeComponent implements OnInit {
 
   deleteRecipe(id: number) {
     this.service.delite(id).subscribe(res => {
-      alert(res["status"]);
+      alert('The recipe delited successfully!');
     });
+    /*
     const index = this.recipes.findIndex(x => x.id === id);
     this.recipes.splice(index, 1);
+    */
   };
 
 }
