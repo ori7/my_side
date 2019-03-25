@@ -37,8 +37,11 @@ export class UpdateFormComponent implements OnInit {
     
     this.activatedRoute.params.subscribe(p =>{
       this.recipe.id = p["id"];
-      this.recipe.name = p["name"];
-      this.recipe.instructions = p["instructions"];
+    })
+
+    this.service.getById(this.recipe.id).subscribe(res =>{
+      this.recipe.name = res[0]["name"];
+      this.recipe.instructions = res[0]["instructions"]  //.replace(',', '\n');
     })
   }
 

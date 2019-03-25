@@ -19,7 +19,7 @@ export class RecipeItemComponent implements OnInit {
   
 
   update(recipe) {
-    this.router.navigate(['updateRecipe',recipe.id, { id: recipe.id, instructions: recipe.instructions, name: recipe.name } ]);
+    this.router.navigate(['updateRecipe',recipe.id]);
   }
 
   delite() {
