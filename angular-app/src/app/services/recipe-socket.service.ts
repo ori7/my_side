@@ -18,7 +18,7 @@ export class RecipeSocketService {
 
     this.socket.emit("message");
 
-    return this.socket.fromEvent("message").pipe(map((res: RecipeModel[]) => {console.log(res);
+    return this.socket.fromEvent("message").pipe(map((res: RecipeModel[]) => {
       res.forEach(r => {
         if (typeof r.instructions === 'string') {
           r.instructions = r.instructions.split("\n");

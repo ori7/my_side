@@ -132,7 +132,7 @@ function writeToFile(user, callback) {
     });
 };
 
-app.get('/recipes/:id', function (req, res) {
+app.get('/recipes/:id?', function (req, res) {
     getR(function (error, results) {
         if (error) {
             throw error;
@@ -140,16 +140,7 @@ app.get('/recipes/:id', function (req, res) {
         res.send(results);
     }, req.params.id);
 });
-/*
-app.get('/recipes', function (req, res) {
-    getR(function (error, results) {
-        if (error) {
-            throw error;
-        }
-        res.send(results);
-    });
-});
-*/
+
 app.post('/recipes', function (req, res) {
     const query = 'INSERT INTO `recipe`(`name`, `instructions`) VALUES("' + req.body.name + '","' + req.body.instructions + '")';
     connection(query, function (error, results) {
@@ -185,17 +176,7 @@ app.delete('/recipes/:id', function (req, res) {
         });
     });
 });
-/*
-app.getById('/recipes/:id', function (req, res) {
-    var query = 'SELECT `id`, `name`, `instructions` FROM `recipe` WHERE `id` ="' + req.params.id + '"';
-    connection(query, function (error, results) {
-        if (error) {
-            throw error;
-        }
-        res.send(results);console.log(results);
-    });
-});
-*/
+
 http.listen(PORT, function () {
     console.log('server started at port ' + PORT)
 });

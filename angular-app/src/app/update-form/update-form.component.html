@@ -7,5 +7,5 @@
     <label for="instructions">Instructions:</label>
     <textarea [(ngModel)]="recipe.instructions" type="text" rows="4" class="form-control" id="instructions" placeholder="Enter instructions" name="instructions" required></textarea>
   </div>
-  <button [disabled]="updateForm.form.invalid" type="submit" class="btn btn-primary" (click)='updateRecipe(updateForm)'>Update recipe</button>
+  <button [disabled]="updateForm.form.invalid" type="submit" class="btn btn-primary" (click)='updateRecipe()'>Update recipe</button>
 </form>
